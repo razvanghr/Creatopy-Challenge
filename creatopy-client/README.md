@@ -22,6 +22,10 @@ git clone https://github.com/razvanghr/Creatopy-Challenge.git
 
 ### `npm run start` - start the application
 
+### Note
+  
+  --note: to generate ads after a given ad, the server part of the application is needed: https://github.com/razvanghr/Creatopy-Challenge/tree/main/creatopy-server
+
 
 ### Contact
 
