@@ -5,6 +5,7 @@ import TemplateEditorMenu from "./TemplateEditorMenu";
 import { getTemplateType } from "../../functions/getTemplateType";
 import { TemplateEditorStyled } from "../styles/TemplateEdiotr.styled";
 import { PostStyled } from "../styles/Post.styled";
+import BrandColorsShowcase from "../BrandColorsShowcase";
 
 export type TPostText = {
   text?: string;
@@ -31,6 +32,7 @@ const TemplateEditor = ({ apiData, selectedTemplate }: TemplateEditorProps) => {
     setPostTitle({ text: extractedData.title || "" });
     setPostDesc({ text: extractedData.description || "" });
     setPostAction({ text: extractedData.callToAction || "Shop Now" });
+    console.log(apiData?.adBrand);
   }, [apiData]);
 
   return (
@@ -51,6 +53,13 @@ const TemplateEditor = ({ apiData, selectedTemplate }: TemplateEditorProps) => {
         >
           {postAction?.text}
         </button>
+        {apiData?.adBrand && (
+          <img
+            src={apiData.adBrand.logos[0].formats[0].src}
+            style={{ width: "50%" }}
+            alt=""
+          />
+        )}
       </PostStyled>
       <div className="editor-menu-card">
         <TemplateEditorMenu
@@ -88,7 +97,11 @@ const TemplateEditor = ({ apiData, selectedTemplate }: TemplateEditorProps) => {
             />
           </div>
         </div>
-        <div></div>
+        {apiData?.adBrand && (
+          <BrandColorsShowcase
+            brandColours={apiData.adBrand.colors}
+          ></BrandColorsShowcase>
+        )}
       </div>
     </TemplateEditorStyled>
   );

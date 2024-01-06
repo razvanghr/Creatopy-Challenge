@@ -33,6 +33,7 @@ const DataInput = ({
   const [imageDescription, setimageDescription] = useState<string | null>(null);
   const [inputStatus, setInputStatus] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [brandName, setBrandName] = useState<string | null>(null);
 
   const adRequest = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -76,12 +77,29 @@ const DataInput = ({
         n: 1,
         size: getTemplateSize(selectedTemplate) as any,
       });
+
+      let getBrandName;
+      if (brandName) {
+        getBrandName = await fetch(
+          `https://api.brandfetch.io/v2/brands/${brandName}.com`,
+          {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization:
+                "Bearer /7riU0CWHYyxC4EfGzikU3HKSY+HTJwOIhkAFoUy1gc=",
+            },
+          }
+        );
+      }
+
       setActiveEditor(true);
       setIsLoading(false);
 
       setApiData({
         adText: (await response.choices[0].message.content) || " ",
         adImageURL: (await imageRequest.data[0].url) || " ",
+        adBrand: (await getBrandName?.json()) || null,
       });
 
       smoothScroll("template-editor");
@@ -130,6 +148,19 @@ const DataInput = ({
               setimageDescription(e.target.value);
             }}
             placeholder="ex. Summer Sale Image"
+          />
+        </div>
+        <div className="input-control">
+          <label>
+            Brand Name <span>(optional)</span>
+          </label>
+          <input
+            type="text"
+            value={brandName || ""}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setBrandName(e.target.value);
+            }}
+            placeholder="ex. Google"
           />
         </div>
         {!isLoading ? (

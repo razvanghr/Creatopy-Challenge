@@ -4,9 +4,12 @@ import picImage from "../assets/Images/artist.svg";
 import TemplateEditor from "./template/TemplateEditor";
 import { useState } from "react";
 
+import { TBrandFetchResponse } from "../types/TBrandFetchResponse";
+
 export type TApiData = {
   adText: string;
   adImageURL?: string;
+  adBrand?: TBrandFetchResponse;
 };
 
 type TemplateProps = {

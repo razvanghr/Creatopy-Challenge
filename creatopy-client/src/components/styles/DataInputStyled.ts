@@ -50,6 +50,10 @@ export const DataInputStyled = styled.form`
   label {
     font-size: 1.2rem;
     text-transform: uppercase;
+
+    span {
+      font-size: 0.7rem;
+    }
   }
 
   @media screen and (max-width: 480px) {
