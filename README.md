@@ -33,6 +33,9 @@
 
   --Openai v4.24.1 - to work with the openai api
 
+# Note
+    -- To generate ads after a certain ad. The server side must be running
+
 
 # Contact
 
